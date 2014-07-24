@@ -8,8 +8,8 @@ function mminitialize() {
 
   // Mini map setup
   var mapOptions = {
-    center: new google.maps.LatLng(0, 0, true),
-    zoom: 1,
+    center: new google.maps.LatLng(44.802543, 20.465628, true),
+    zoom: 12,
     mapTypeControl: false,
     streetViewControl: false,
     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -21,7 +21,7 @@ function mminitialize() {
   var guessMarkerOptions = new google.maps.Marker({
       map: mMap,
       visible: true,
-      title: 'Your guess',
+      title: 'Pogadjaj',
       draggable: false
       //icon: '/img/googleMapsMarkers/red_MarkerB.png'
   });
