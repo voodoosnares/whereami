@@ -115,7 +115,9 @@
           points = 7000;
         } else if(inRange(distance, 11, 50)) {
           points = 3000;
-        } else if(inRange(distance, 51, 200)) {
+        } else if(inRange(distance, 51, 100)) {
+          points = 1000;
+        } else if(inRange(distance, 101, 200)) {
           points = 500;
         } else if(inRange(distance, 201, 500)) {
           points = 100;
