@@ -15,7 +15,7 @@ function rminitialize() {
     var guessLtLng = new google.maps.LatLng(GuessLLArr[0],GuessLLArr[1]);
 
     var mapOptions = {
-      zoom: 2,
+      zoom: 10,
       center: actualLtLng,
       mapTypeControl: false,
       streetViewControl: false,
@@ -25,13 +25,13 @@ function rminitialize() {
 
     var actualMarker = new google.maps.Marker({
         position: actualLtLng,
-        title:"Actual Location",
+        title:"Tražena pozicija",
         icon: 'img/actual.png'
     });
 
     var guessMarker = new google.maps.Marker({
         position: guessLtLng,
-        title:"Your Guess",
+        title:"Vaš pogodak",
         icon: 'img/guess.png'
     });
 
