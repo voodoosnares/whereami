@@ -69,7 +69,7 @@
 
     // Reset Timer
     function resetTimer(){
-      count = 30;
+      count = 20;
       counter = setInterval(timer, 1000);
     }
 
