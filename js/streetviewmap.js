@@ -34,7 +34,7 @@ function svinitialize() {
                 linksControl: false,
                 pov: {
                     heading: 270,
-                    zoom: 1,
+                    zoom: 0,
                     pitch: -10
                 },
                 visible: true
