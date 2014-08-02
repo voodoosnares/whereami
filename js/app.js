@@ -35,6 +35,12 @@ $(document).ready(function () {
 
     // Guess Button
     $('#guessButton').click(function () {
+        if(!window.guessLatLng)
+        {
+            alert("Prvo morate izabrati lokaciju na mapi!");
+            return;
+        }
+
         $('#guessButton').hide();
         doGuess();
         rminitialize();
@@ -115,6 +121,7 @@ $(document).ready(function () {
             } else {
                 points = 0;
             }
+
             if (round < 5) {
                 endRound();
             } else if (round >= 5) {

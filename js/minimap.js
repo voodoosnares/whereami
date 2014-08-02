@@ -16,7 +16,7 @@ function mminitialize() {
     var guessMarkerOptions = new google.maps.Marker({
         map: mMap,
         visible: true,
-        title: 'Pogadjaj',
+        title: 'Pogađaj',
         draggable: false
         //icon: '/img/googleMapsMarkers/red_MarkerB.png'
     });
