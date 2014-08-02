@@ -105,22 +105,17 @@ $(document).ready(function () {
             if (inRange(distance, 1, 2)) {        // Real basic point thresholds depending on kilometer distances
                 points = 10000;
             } else if (inRange(distance, 3, 10)) {
-                points = 7000;
-            } else if (inRange(distance, 11, 50)) {
-                points = 3000;
-            } else if (inRange(distance, 51, 100)) {
-                points = 1000;
-            } else if (inRange(distance, 101, 200)) {
-                points = 500;
-            } else if (inRange(distance, 201, 500)) {
-                points = 100;
-            } else if (inRange(distance, 501, 800)) {
-                points = 20;
-            } else if (inRange(distance, 801, 1300)) {
+                points = 7000 - distance*10;
+            } else if (inRange(distance, 11, 100)) {
+                points = 3000 - distance*10;
+            } else if (inRange(distance, 101, 490)) {
+                points = 500 - distance;
+            } else if (inRange(distance, 491, 800)) {
                 points = 10;
             } else {
                 points = 0;
             }
+
 
             if (round < 5) {
                 endRound();
