@@ -54,7 +54,7 @@ $(document).ready(function () {
         // Reload maps to refresh coords
         svinitialize();
         mminitialize();
-        rminitialize();
+
         // Reset Timer
         resetTimer();
     });
