@@ -34,6 +34,9 @@
             a.src = g;
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        var _gaq = _gaq || [];
+
         _gaq.push(['_setDomainName', 'aries.rs']);
         ga('create', 'UA-49377306-1', 'auto');
         ga('send', 'pageview');
