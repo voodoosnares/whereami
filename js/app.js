@@ -156,6 +156,7 @@ $(document).ready(function () {
         $('.roundScore').html('Rezultat iz prošle runde: <b>' + roundScore + '</b>');
         $('.totalScore').html('Totalni rezultat: <b>' + totalScore + '</b>');
         $('#scoreBoard').hide();
+        $('#guessButton').hide();
 
         // If distance is undefined, that means they ran out of time and didn't click the guess button
         if (typeof distance === 'undefined' || ranOut == true) {
