@@ -24,11 +24,14 @@ $(document).ready(function () {
         if (count <= 0) {
             console.log('finished');
 
-            if(round>=5){
+            if(round==5){
                 window.shouldEndGame = true;
             }
 
-            endRound();
+            if(round<=5){
+                endRound();
+            }
+
             clearInterval(counter);
         }
         $("#timer").html(count);
