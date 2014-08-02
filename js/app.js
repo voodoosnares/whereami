@@ -35,12 +35,16 @@ $(document).ready(function () {
 
     // Guess Button
     $('#guessButton').click(function () {
+        $('#guessButton').hide();
         doGuess();
         rminitialize();
+
     });
     // End of round continue button click
     $('#roundEnd').on('click', '.closeBtn', function () {
+
         $('#roundEnd').fadeOut(500);
+        $('#guessButton').show();
         // Reload maps to refresh coords
         svinitialize();
         mminitialize();
@@ -121,6 +125,8 @@ $(document).ready(function () {
         }
         timer();
         window.guessLatLng = '';
+
+
     }
 
     function endRound() {
