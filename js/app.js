@@ -23,11 +23,12 @@ $(document).ready(function () {
         count = count - 1;
         if (count <= 0) {
             console.log('finished');
-            if (round < 5) {
-                endRound();
-            } else if (round >= 5) {
-                endGame();
+
+            if(round>=5){
+                window.shouldEndGame = true;
             }
+
+            endRound();
             clearInterval(counter);
         }
         $("#timer").html(count);
@@ -52,11 +53,18 @@ $(document).ready(function () {
         $('#roundEnd').fadeOut(500);
         $('#guessButton').show();
         // Reload maps to refresh coords
-        svinitialize();
-        mminitialize();
 
-        // Reset Timer
-        resetTimer();
+        if(window.shouldEndGame){
+            endGame();
+        }
+        else {
+            $('#scoreBoard').show();
+            svinitialize();
+            mminitialize();
+
+            // Reset Timer
+            resetTimer();
+        }
     });
     // End of game 'play again' button click
     $('#endGame').on('click', '.playAgain', function () {
@@ -117,11 +125,12 @@ $(document).ready(function () {
             }
 
 
-            if (round < 5) {
-                endRound();
-            } else if (round >= 5) {
-                endGame();
+            if(round>=5){
+                window.shouldEndGame = true;
             }
+
+            endRound();
+
         } else {
             // They ran out
         }
@@ -139,9 +148,11 @@ $(document).ready(function () {
             roundScore = points;
             totalScore = totalScore + points;
         }
+
         $('.round').html('Trenutna runda: <b>' + round + ' od 5</b>');
         $('.roundScore').html('Rezultat iz prošle runde: <b>' + roundScore + '</b>');
         $('.totalScore').html('Totalni rezultat: <b>' + totalScore + '</b>');
+        $('#scoreBoard').hide();
 
         // If distance is undefined, that means they ran out of time and didn't click the guess button
         if (typeof distance === 'undefined' || ranOut == true) {
