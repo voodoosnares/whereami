@@ -100,13 +100,13 @@ p {
 
 #miniMap {
     width: 25%;
+    min-width: 300px;
     height: 40%;
     position: absolute;
     top: 20px;
     right: 20px;
     z-index: 1000;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
-    opacity: 0.8;
 }
 
 #timer {

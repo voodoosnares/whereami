@@ -23,11 +23,15 @@ $(document).ready(function () {
         count = count - 1;
         if (count <= 0) {
             console.log('finished');
-            if (round < 5) {
-                endRound();
-            } else if (round >= 5) {
-                endGame();
+
+            if(round==5){
+                window.shouldEndGame = true;
             }
+
+            if(round<=5){
+                endRound();
+            }
+
             clearInterval(counter);
         }
         $("#timer").html(count);
@@ -35,18 +39,35 @@ $(document).ready(function () {
 
     // Guess Button
     $('#guessButton').click(function () {
+        if(!window.guessLatLng)
+        {
+            alert("Prvo morate izabrati lokaciju na mapi!");
+            return;
+        }
+
+        $('#guessButton').hide();
         doGuess();
         rminitialize();
+
     });
     // End of round continue button click
     $('#roundEnd').on('click', '.closeBtn', function () {
+
         $('#roundEnd').fadeOut(500);
+        $('#guessButton').show();
         // Reload maps to refresh coords
-        svinitialize();
-        mminitialize();
-        rminitialize();
-        // Reset Timer
-        resetTimer();
+
+        if(window.shouldEndGame){
+            endGame();
+        }
+        else {
+            $('#scoreBoard').show();
+            svinitialize();
+            mminitialize();
+
+            // Reset Timer
+            resetTimer();
+        }
     });
     // End of game 'play again' button click
     $('#endGame').on('click', '.playAgain', function () {
@@ -95,32 +116,31 @@ $(document).ready(function () {
             if (inRange(distance, 1, 2)) {        // Real basic point thresholds depending on kilometer distances
                 points = 10000;
             } else if (inRange(distance, 3, 10)) {
-                points = 7000;
-            } else if (inRange(distance, 11, 50)) {
-                points = 3000;
-            } else if (inRange(distance, 51, 100)) {
-                points = 1000;
-            } else if (inRange(distance, 101, 200)) {
-                points = 500;
-            } else if (inRange(distance, 201, 500)) {
-                points = 100;
-            } else if (inRange(distance, 501, 800)) {
-                points = 20;
-            } else if (inRange(distance, 801, 1300)) {
+                points = 7000 - distance*10;
+            } else if (inRange(distance, 11, 100)) {
+                points = 3000 - distance*10;
+            } else if (inRange(distance, 101, 490)) {
+                points = 500 - distance;
+            } else if (inRange(distance, 491, 800)) {
                 points = 10;
             } else {
                 points = 0;
             }
-            if (round < 5) {
-                endRound();
-            } else if (round >= 5) {
-                endGame();
+
+
+            if(round>=5){
+                window.shouldEndGame = true;
             }
+
+            endRound();
+
         } else {
             // They ran out
         }
         timer();
         window.guessLatLng = '';
+
+
     }
 
     function endRound() {
@@ -131,9 +151,12 @@ $(document).ready(function () {
             roundScore = points;
             totalScore = totalScore + points;
         }
+
         $('.round').html('Trenutna runda: <b>' + round + ' od 5</b>');
         $('.roundScore').html('Rezultat iz prošle runde: <b>' + roundScore + '</b>');
         $('.totalScore').html('Totalni rezultat: <b>' + totalScore + '</b>');
+        $('#scoreBoard').hide();
+        $('#guessButton').hide();
 
         // If distance is undefined, that means they ran out of time and didn't click the guess button
         if (typeof distance === 'undefined' || ranOut == true) {
@@ -167,7 +190,7 @@ $(document).ready(function () {
         totalScore = totalScore + points;
         $('#miniMap, #pano, #guessButton, #scoreBoard, #timer').hide();
         $('#endGame').html('<h1>Čestitamo!</h1><h2>Vaš rezultat je:</h2><h1>'
-            + totalScore + '!</h1><br/><p>Šeruj ovo na:</p><br/><a class="btn btn-large facebook fb-share-button" href="https://www.facebook.com/sharer/sharer.php?src=100&p[title]=' + encodeURIComponent('Whereami') + '&p[summary]=' + encodeURIComponent('Upravo sam osvojio ' + totalScore + ' poena u igri PRONAĐI SE U BEOGRADU!') + '&p[url]=' + encodeURIComponent('http://aries.rs') + '" target="_blank"><i class="fa fa-facebook fa-lg"></i><span>Facebook</span></a> <a class="btn btn-large twitter" href="https://twitter.com/intent/tweet?text=Upravo+sam+osvojio+' + totalScore + '+poena+u+igri+PRONAĐI+SE+U+BEOGRADU+@AriesCTW%21&url=http://www.fun.aries.rs/whoami" target="_blank"><i class="fa fa-twitter fa-lg"></i><span class="rps-text">Twitter</span></a></p><br/><button class="btn btn-large playAgain" type="button">Igraj ponovo?</button>');
+            + totalScore + '!</h1><br/><p>Šeruj ovo na:</p><br/><a class="btn btn-large facebook fb-share-button" href="https://www.facebook.com/sharer/sharer.php?src=100&p[url]=' + encodeURIComponent('http://fun.aries.rs/pronadji-se-u-beogradu/') + '" target="_blank"><i class="fa fa-facebook fa-lg"></i><span>Facebook</span></a> <a class="btn btn-large twitter" href="https://twitter.com/intent/tweet?text=Upravo+sam+osvojio+' + totalScore + '+poena+u+igri+PRONAĐI+SE+U+BEOGRADU+@AriesCTW%21&url=http://fun.aries.rs/pronadji-se-u-beogradu/" target="_blank"><i class="fa fa-twitter fa-lg"></i><span class="rps-text">Twitter</span></a></p><br/><button class="btn btn-large playAgain" type="button">Igraj ponovo?</button>');
         $('#endGame').fadeIn(500);
         rminitialize();
         // We're done with the game
