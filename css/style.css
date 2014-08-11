@@ -224,3 +224,25 @@ footer a:hover {
     text-decoration: none;
     color: #ccc;
 }
+
+.logo {
+    background: url("http://aries.rs/images/logo.png") center no-repeat;
+    background: url("http://aries.rs/images/logo.png") center no-repeat;
+    display: block;
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    z-index: 999999999;
+    background-size: contain;
+    left: 50%;
+    top: 10px;
+    margin-left: -75px;
+}
+
+@media (max-height: 700px) {
+    .logo {
+        height: 100px;
+        width: 100px;
+        margin-left: -50px;
+    }
+}
